@@ -27,14 +27,11 @@ import static android.widget.Toast.LENGTH_SHORT;
 public class SignUpActivity extends AppCompatActivity {
 
 
-    EditText userName,userEmail,userPhone,userPassword;
+    public String name, email, phone, password;
+    EditText userName, userEmail, userPhone, userPassword;
     Button signUpUserBtn;
-
-
-    public String name,email,phone,password;
-
-
     private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +45,15 @@ public class SignUpActivity extends AppCompatActivity {
 
         signUpUserBtn = (Button) findViewById(R.id.SignUpButton);
         userPhone = (EditText) findViewById(R.id.phone_number);
-
+        TextView resetpass = (TextView) findViewById(R.id.haveAccountTextView) ;
+        resetpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent(SignUpActivity.this, SignInActivity.class));
+            }
+        });
         signUpUserBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
@@ -88,11 +92,6 @@ public class SignUpActivity extends AppCompatActivity {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        //   DatabaseReference reference = FirebaseDatabase.getInstance().getReference(auth.getUid());
-                        //   reference.child("full_name").setValue(name);
-                        //    reference.child("email").setValue(email);
-                        //    reference.child("phone_number").setValue(phone);
-                        //   reference.child("user").setValue("user");
                         Toast.makeText(SignUpActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), LENGTH_SHORT).show();
                         if (!task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "Authentication failed." + task.getException(),

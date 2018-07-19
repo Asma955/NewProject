@@ -14,17 +14,17 @@ public class FirstActivity extends AppCompatActivity {
         setContentView(R.layout.activity_first);
 
         Button SignUpButton = (Button) findViewById(R.id.Signupbutton);
-        Button SignInButton = (Button) findViewById(R.id.Signinbutton);
+        Button LoginButton = (Button) findViewById(R.id.loginbutton);
 
         SignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity( new Intent(FirstActivity.this, SignInActivity.class));
+                startActivity( new Intent(FirstActivity.this, SignUpActivity.class));
             }
         });
 
 
-        SignInButton.setOnClickListener(new View.OnClickListener() {
+        LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity( new Intent(FirstActivity.this, SignInActivity.class));
